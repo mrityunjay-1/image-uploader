@@ -91,7 +91,7 @@ const App = () => {
                 images && images.length > 0 ?
                     <div style={{ display: "grid", placeItems: "center" }}>
                         <button onClick={() => {
-                            window?.ReactNativeWebView?.postMessage(JSON.stringify(window.location));
+                            window?.ReactNativeWebView?.postMessage(JSON.stringify(images));
                         }} className="files-label" style={{ border: "none", backgroundColor: "indigo" }}>Upload &nbsp; ⇧</button>
                     </div>
                     :
