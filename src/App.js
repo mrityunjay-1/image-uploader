@@ -47,13 +47,13 @@ const App = () => {
             {
                 showImageModal && currImage ?
                     <>
-                        <div style={{ zIndex: 9999, position: "fixed", width: "100%", height: "100%", top: 0, left: 0, display: "grid", placeItems: "center", background: "rgba(255, 255, 255, 0.6)", backdropFilter: "blur(10px)" }}>
+                        <div style={{ overflow: "auto", zIndex: 9999, position: "absolute", width: "100%", height: "100%", top: 0, left: 0, display: "grid", placeItems: "center", background: "rgba(255, 255, 255, 0.6)", backdropFilter: "blur(10px)" }}>
                             <img alt="foods" src={currImage} style={{ width: "100%" }} />
 
                             <h1 onClick={() => {
                                 setCurrImage("");
                                 setShowImageModal(false);
-                            }} style={{ border: "0.2rem solid black", position: "absolute", top: "3%", right: "5%", backgroundColor: "white", fontSize: "3rem", width: "4rem", height: "4rem", display: "grid", placeItems: "center", borderRadius: "5rem" }}>&times;</h1>
+                            }} style={{ cursor: "pointer", border: "0.2rem solid black", position: "absolute", top: "3%", right: "5%", backgroundColor: "white", fontSize: "3rem", width: "4rem", height: "4rem", display: "grid", placeItems: "center", borderRadius: "5rem" }}>&times;</h1>
 
                         </div>
                     </>
@@ -75,9 +75,9 @@ const App = () => {
                 {
                     images && images.length > 0 && images.map((img) => {
                         return (
-                            <div style={{ position: "relative", width: "25%", height: "25%", display: "grid", placeItems: "center" }}>
+                            <div style={{ position: "relative", width: "25%", height: "25%", display: "grid", placeItems: "center", }}>
                                 <img alt="foods" onClick={() => showImage(img)} src={img} style={{ width: "90%", height: "90%" }} />
-                                <h1 onClick={() => removeImage(img)} style={{ position: "absolute", top: 0, right: 0, backgroundColor: "white", width: "2rem", height: "2rem", display: "grid", placeItems: "center", borderRadius: "5rem" }}>&times;</h1>
+                                <h1 onClick={() => removeImage(img)} style={{ cursor: "pointer", position: "absolute", top: 0, right: 0, backgroundColor: "white", width: "2rem", height: "2rem", display: "grid", placeItems: "center", borderRadius: "5rem" }}>&times;</h1>
                             </div>
                         );
                     })
