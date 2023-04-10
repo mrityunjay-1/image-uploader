@@ -4,17 +4,11 @@ import "./css/app.css";
 const App = () => {
 
     const [images, setImages] = useState();
-
     const [showImageModal, setShowImageModal] = useState(false);
-
     const [currImage, setCurrImage] = useState("");
-
-    console.log("images: ", images);
 
     const getImages = (e) => {
         try {
-
-            console.log(e.target.files[0]);
 
             const imageUrls = [];
 
