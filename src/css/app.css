@@ -1,0 +1,20 @@
+.header {
+    padding: 3rem 1%;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.input-type-file {
+    display: none;
+}
+
+.files-label {
+    width: 60%;
+    padding: 1rem;
+    background-color: indigo;
+    color: white;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: red;
+}
