@@ -43,7 +43,7 @@ const App = () => {
             formData.append(image.name, allFiles[image]);
         }
 
-        const raw_res = await fetch(`http://localhost:8080/business/upload-images`, {
+        const raw_res = await fetch(`https://naimecys-backend-dev.onrender.com/business/upload-images`, {
             method: "POST",
             body: formData
         });
