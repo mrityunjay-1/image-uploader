@@ -4,13 +4,21 @@ import "./css/app.css";
 const App = () => {
 
     const [images, setImages] = useState();
+    const [allFiles, setAllFiles] = useState([]);
+
+    const [uploading, setUploading] = useState(false);
+
     const [showImageModal, setShowImageModal] = useState(false);
     const [currImage, setCurrImage] = useState("");
 
     const getImages = (e) => {
         try {
 
+            // console.log("e.target.files : ", e.target.files);
+
             const imageUrls = [];
+
+            setAllFiles(e.target.files);
 
             for (const image of e.target.files) {
                 let url = URL.createObjectURL(image);
@@ -22,6 +30,30 @@ const App = () => {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const uploadImages = async () => {
+
+        setUploading(true);
+
+        const formData = new FormData();
+
+        for (const image in images) {
+            console.log("Image: ", image);
+            formData.append(image.name, allFiles[image]);
+        }
+
+        const raw_res = await fetch(`http://localhost:8080/business/upload-images`, {
+            method: "POST",
+            body: formData
+        });
+
+        const res = await raw_res.json();
+
+        setUploading(false);
+
+        return res;
+
     }
 
     const removeImage = (src) => {
@@ -37,6 +69,23 @@ const App = () => {
 
     return (
         <>
+
+            {
+                uploading ?
+
+                    <div style={{ overflow: "auto", zIndex: 9999, position: "absolute", width: "100%", height: "100%", top: 0, left: 0, display: "grid", placeItems: "center", background: "rgba(255, 255, 255, 0.6)", backdropFilter: "blur(10px)" }}>
+                        
+                        <progress></progress>
+
+                        <br />
+
+                        <h1>Uploading...</h1>
+
+                    </div>
+
+                    :
+                    null
+            }
 
             {
                 showImageModal && currImage ?
@@ -84,8 +133,9 @@ const App = () => {
             {
                 images && images.length > 0 ?
                     <div style={{ display: "grid", placeItems: "center" }}>
-                        <button onClick={() => {
-                            window?.ReactNativeWebView?.postMessage(JSON.stringify(images));
+                        <button onClick={async () => {
+                            const res = await uploadImages();
+                            window?.ReactNativeWebView?.postMessage(JSON.stringify(res));
                         }} className="files-label" style={{ border: "none", backgroundColor: "indigo" }}>Upload &nbsp; ⇧</button>
                     </div>
                     :
